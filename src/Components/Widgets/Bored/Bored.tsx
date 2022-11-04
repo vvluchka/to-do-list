@@ -24,9 +24,11 @@ const Bored: React.FC = () => {
 
   return (
     <Box>
-        <Typography variant='h5'>Hey Here Is A Tip:</Typography>
-        <Typography>Activity: <br/> {activity}</Typography>
-        <Typography>Type: {type}</Typography>
+        <Typography fontWeight={700}variant='h5'>Hey Here Is A Tip:</Typography>
+        <Typography fontWeight={700}>Activity:</Typography>
+        <Typography>{activity}</Typography>
+        <Typography fontWeight={700}>Type:</Typography>
+        <Typography>{type}</Typography> 
 
     </Box>
   )

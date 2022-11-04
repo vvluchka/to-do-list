@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Bored from "./Bored/Bored";
+import Location from "./Location/Location";
+import CatFact from "./CatFact/CatFact";
+import Dog from "./Dog/Dog";
 import { Box, Typography} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
@@ -27,13 +30,19 @@ const WidgetsPanel: React.FC = () => {
           </Item>
         </Grid>
         <Grid item xs={6}>
-          <Item>2</Item>
+          <Item>
+            <Location/>
+          </Item>
         </Grid>
         <Grid item xs={6}>
-          <Item>3</Item>
+          <Item>
+            <CatFact/>
+          </Item>
         </Grid>
         <Grid item xs={6}>
-          <Item>4</Item>
+          <Item>
+            <Dog/>
+          </Item>
         </Grid>
       </Grid>
     </Box>
