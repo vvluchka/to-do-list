@@ -1,6 +1,6 @@
 import React from "react";
 import TodoItem from "./TodoItem/TodoItem";
-import type { Todo } from "../../App/App";
+import type { Todo } from "../../Pages/TodoApp/TodoApp";
 import { Box } from "@mui/material";
 
 interface TodoListProps {
@@ -10,10 +10,28 @@ interface TodoListProps {
   onPinTodo: (id: Todo["id"]) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({todoList, onDeleteTodo, onCheckTodo, onPinTodo}) => (
-  <Box>
+const TodoList: React.FC<TodoListProps> = ({
+  todoList,
+  onDeleteTodo,
+  onCheckTodo,
+  onPinTodo,
+}) => (
+  <Box
+    sx={{
+      padding: "20px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    }}
+  >
     {todoList.map((todo) => (
-      <TodoItem todo={todo} key={todo.id} onDeleteTodo={onDeleteTodo} onCheckTodo={onCheckTodo} onPinTodo={onPinTodo}/>
+      <TodoItem
+        todo={todo}
+        key={todo.id}
+        onDeleteTodo={onDeleteTodo}
+        onCheckTodo={onCheckTodo}
+        onPinTodo={onPinTodo}
+      />
     ))}
   </Box>
 );

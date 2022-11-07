@@ -1,9 +1,9 @@
-import React from "react";
-import { Paper, Box, Typography, IconButton, Checkbox } from "@mui/material";
+import React, {useState} from "react";
+import { Paper, Box, Typography, IconButton, Checkbox, Modal, Button} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from '@mui/icons-material/Star';
-import type { Todo } from "../../../App/App";
+import type { Todo } from 'Pages/TodoApp/TodoApp';
 
 
 interface TodoItemProps{
@@ -15,11 +15,28 @@ interface TodoItemProps{
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+
+
+
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onDeleteTodo, onCheckTodo, onPinTodo}) => (
+  
+
   <Paper
     elevation={2}
     sx={{
-      width: "100%",
+      width: "fit-content",
       padding: "10px",
       borderRadius: "10px",
       display: "flex",
@@ -50,6 +67,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onDeleteTodo, onCheckTodo, on
           textDecoration: todo.checked ? "line-through" : "none",
         }}
         >{todo.description}</Typography>
+        <Typography></Typography>
       </Box>
       <Box>
         <IconButton color="warning" onClick={() => onPinTodo(todo.id)}>
@@ -59,6 +77,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onDeleteTodo, onCheckTodo, on
         <IconButton aria-label="delete" color="error" onClick={() => onDeleteTodo(todo.id)}>
           <DeleteIcon />
         </IconButton>
+        
       </Box>
     </Box>
   </Paper>

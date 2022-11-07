@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import TodoList from "Components/TodoList/TodoList";
-import { TextField, Button, Box} from "@mui/material";
-import type { Todo } from "App/App";
+import { TextField, Button, Box, Typography, IconButton, Paper} from "@mui/material";
+import Modal from '@mui/material/Modal';
+import type { Todo } from "../../Pages/TodoApp/TodoApp";
 import "./TodoPanel.scss";
 
 
@@ -10,25 +11,53 @@ interface PanelProps{
   
 }
 
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
 const TodoPanel: React.FC<PanelProps> = ({onAddTodo}) => {
+
+  
+
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [todo, setTodo] = useState("");
   
-  const onClick = () => {
+  const onCancel = () => {
     setTodo("");
-    onAddTodo({description: todo});
+    handleClose();
   };
 
+  const onConfirm =() => {
+    setTodo("");
+    onAddTodo({description: todo});
+    handleClose();
+  }
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
     const {value} = event.target;
     setTodo(value);
   }
 
   return (
-    <div className="panel-container">
+    <Box className="panel-container">
 
       
-      <form className="form">
+      <Box className="form">
+        
         
         <TextField
           size="small"
@@ -38,14 +67,29 @@ const TodoPanel: React.FC<PanelProps> = ({onAddTodo}) => {
           value={todo}
           onChange={onChange}
         />
+       
         
-        <Button size="large" variant="contained" onClick={onClick}>
-          Add Note
-        </Button>
-        
-      </form>
+        <Button size="large" variant="contained" onClick={handleOpen}>Add Note</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Are you sure?
+            </Typography>
+          
+            <Button size="large" variant="contained" onClick={onConfirm}>Add Note</Button>
+            <IconButton>
+              <Button size="large" variant="contained" onClick={onCancel}>Cancel</Button>
+            </IconButton>
+          </Box>
+        </Modal>
+      </Box>
 
-    </div>
+    </Box>
   );
 }
 
