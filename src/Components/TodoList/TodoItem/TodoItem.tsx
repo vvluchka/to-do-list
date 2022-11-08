@@ -29,10 +29,23 @@ const style = {
 
 
 
-
-const TodoItem: React.FC<TodoItemProps> = ({ todo, onDeleteTodo, onCheckTodo, onPinTodo}) => (
+const TodoItem: React.FC<TodoItemProps> = ({ todo, onDeleteTodo, onCheckTodo, onPinTodo}) => {
   
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
+
+  const onCancel = () => {
+    handleClose();
+  };
+
+  const onDelete =() => {
+    onDeleteTodo(todo.id);    
+    handleClose();
+  };
+
+  return(
   <Paper
     elevation={2}
     sx={{
@@ -74,13 +87,29 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onDeleteTodo, onCheckTodo, on
           {todo.pinned ? <StarIcon /> : <StarBorderIcon />}
         </IconButton>
 
-        <IconButton aria-label="delete" color="error" onClick={() => onDeleteTodo(todo.id)}>
+        <IconButton aria-label="delete" color="error" onClick={handleOpen}>
           <DeleteIcon />
         </IconButton>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography>Are you sure?</Typography>
+          
+            <Button size="large" variant="contained" onClick={onDelete}>Yes</Button>
+            <IconButton>
+              <Button size="large" variant="contained" onClick={onCancel}>No</Button>
+            </IconButton>
+          </Box>
+        </Modal>
         
       </Box>
     </Box>
   </Paper>
-);
+)
+      }
 
 export default TodoItem;

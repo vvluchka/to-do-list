@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import TodoItem from "./TodoItem/TodoItem";
 import type { Todo } from "../../Pages/TodoApp/TodoApp";
 import { Box } from "@mui/material";
@@ -15,7 +15,12 @@ const TodoList: React.FC<TodoListProps> = ({
   onDeleteTodo,
   onCheckTodo,
   onPinTodo,
-}) => (
+}) => {
+
+  const [todo, setTodo] = useState(true)
+
+
+return(
   <Box
     sx={{
       padding: "20px",
@@ -35,4 +40,5 @@ const TodoList: React.FC<TodoListProps> = ({
     ))}
   </Box>
 );
+    };
 export default TodoList;

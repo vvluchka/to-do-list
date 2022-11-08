@@ -14,7 +14,6 @@ const CatFact: React.FC = () => {
         axios.get('https://catfact.ninja/fact')
         .then(res => {
             setFact(res.data)
-            console.log(res.data)
         })
         .catch(err => {
             console.log(err)

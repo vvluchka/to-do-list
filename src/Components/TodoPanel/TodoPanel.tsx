@@ -28,15 +28,13 @@ const style = {
 
 const TodoPanel: React.FC<PanelProps> = ({onAddTodo}) => {
 
-  
-
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [todo, setTodo] = useState("");
-  
+
+
   const onCancel = () => {
     setTodo("");
     handleClose();
@@ -46,7 +44,8 @@ const TodoPanel: React.FC<PanelProps> = ({onAddTodo}) => {
     setTodo("");
     onAddTodo({description: todo});
     handleClose();
-  }
+  };
+  
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
     const {value} = event.target;
     setTodo(value);
@@ -77,9 +76,7 @@ const TodoPanel: React.FC<PanelProps> = ({onAddTodo}) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Are you sure?
-            </Typography>
+            <Typography>Are you sure?</Typography>
           
             <Button size="large" variant="contained" onClick={onConfirm}>Add Note</Button>
             <IconButton>

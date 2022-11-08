@@ -5,8 +5,9 @@ import TodoList from "../../Components/TodoList/TodoList";
 import WidgetsPanel from "../../Components/Widgets/WidgetsPanel";
 import Modal from "../../Components/Modal/Modal";
 import LogIn from "../LogIn/LogIn";
-import { Typography, Paper, Box , Switch } from "@mui/material";
+import { Typography, Paper, Box , Switch, IconButton } from "@mui/material";
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export type Todo = {
   id: number;
@@ -53,12 +54,12 @@ const TodoApp: React.FC = () => {
         checked: false,
         pinned: false,
       },
+
     ]);
+   
+    
   };
 
-  useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }, [todoList]);
 
 
 const onPinTodo = (id: Todo["id"]) => {
@@ -90,12 +91,17 @@ const onCheckTodo = (id: Todo["id"]) => {
 };
 
 
-
   return (
     <ThemeProvider theme={theme}>
       
     <Paper className="todo-app">
+    <Box sx={{display:'flex', flexDirection:'row-reverse' , alignItems:'flex-start', justifyContent:'center', marginRight:'30px'}}>
     <Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} />
+    <IconButton href="/">
+      <LogoutIcon />
+      <Typography>Log Out</Typography>
+    </IconButton>
+    </Box>
       <Typography></Typography>
       <Box >
         <TodoPanel onAddTodo={onAddTodo} />

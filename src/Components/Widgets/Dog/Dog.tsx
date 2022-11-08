@@ -10,7 +10,6 @@ const Dog: React.FC = () => {
         axios.get('https://dog.ceo/api/breeds/image/random')
         .then(res => {
             setDog(res.data)
-            console.log(res.data)
         })
         .catch(err => {
             console.log(err)

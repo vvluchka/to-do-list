@@ -1,14 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Box, Button, TextField, Typography} from '@mui/material'
 import FormControlUnstyled from '@mui/base/FormControlUnstyled';
 import { useHistory } from 'react-router';
-
-
-let data = [
-    {
-        name: ""
-    }
-]
+import {Link} from 'react-router-dom'
 
 
 const LogIn: React.FC = () => {
@@ -16,9 +10,10 @@ const LogIn: React.FC = () => {
     let history = useHistory();
 
     const [disabled, setDisabled] = React.useState(true);
-    const [name, setName] = React.useState("");
+    const [userName, setUserName] = React.useState("");
 
-
+    const data = userName;
+    
     document.addEventListener('input', (event) => {
         const target = event.target as HTMLInputElement;
         if (target.value.length > 0) {
@@ -30,8 +25,8 @@ const LogIn: React.FC = () => {
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
         const {value} = event.target;
-        setName(value);
-        console.log(name);
+        setUserName(value);
+        console.log(userName);
       }
     
  
@@ -51,14 +46,19 @@ const LogIn: React.FC = () => {
           id="outlined-basic"
           label="Enter your username"
           variant="outlined"
-          
+          onChange={onChange}
           
         />
-        <Button  variant="outlined" disabled={disabled} onClick={() =>{
-            history.push("/todo");
-        }}>Submit</Button>
-        
 
+            <Typography>{userName}</Typography>
+        <Button  variant="outlined" disabled={disabled} onClick={() =>{
+            history.push({
+                pathname: '/todo',
+            });
+        }}>Submit</Button>
+       
+
+        
     </Box>
   )
 }
